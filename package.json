@@ -6,11 +6,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luzhengli/zhanjuan.git"
+    "url": "git+https://github.com/luzhengli/Zhanjuan.git"
   },
-  "homepage": "https://github.com/luzhengli/zhanjuan#readme",
+  "homepage": "https://github.com/luzhengli/Zhanjuan#readme",
   "bugs": {
-    "url": "https://github.com/luzhengli/zhanjuan/issues"
+    "url": "https://github.com/luzhengli/Zhanjuan/issues"
   },
   "engines": {
     "node": ">=24.0.0"
