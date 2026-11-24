@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "project": "zhanjuan-demo",
+  "provider": "local-canvas",
+  "fallbackProviders": ["claude-artifact"],
+  "devServer": {
+    "command": "node ../node_modules/vite/bin/vite.js --config vite.config.ts --host 127.0.0.1 --port {port} --strictPort",
+    "cwd": ".",
+    "readyPath": "/",
+    "readyTimeoutMs": 20000,
+    "reuseProbe": "/__zhanjuan-health",
+    "stripFrameHeaders": true,
+    "expectedProject": "zhanjuan-demo",
+    "expectedMode": "demo"
+  },
+  "designSystemBoard": {
+    "id": "DesignSystem",
+    "title": "Design System Studio",
+    "route": "/#/__studio/design-system",
+    "readySelector": "[data-studio-ready='design-system']",
+    "viewports": [1440]
+  },
+  "boards": [
+    {
+      "id": "Workspace",
+      "title": "Workspace Overview",
+      "route": "/",
+      "readySelector": "[data-page='workspace']",
+      "viewports": [1440, 960, 760],
+      "defaultTheme": "light"
+    },
+    {
+      "id": "Activity",
+      "title": "Activity Timeline",
+      "route": "/#/activity",
+      "readySelector": "[data-page='activity']",
+      "viewports": [1440, 860],
+      "defaultTheme": "light"
+    }
+  ],
+  "proposals": {
+    "dir": "src/proposals",
+    "routePrefix": "/#/__studio/proposals/",
+    "compareWith": "Workspace"
+  },
+  "notesDir": ".harness/.local/zhanjuan"
+}

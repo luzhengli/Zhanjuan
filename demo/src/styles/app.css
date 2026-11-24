@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme inline {
+  --color-canvas: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-line: var(--border);
+  --color-ink: var(--text-main);
+  --color-muted: var(--text-muted);
+  --color-brand: var(--accent);
+  --color-brand-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --shadow-float: var(--shadow-float);
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}

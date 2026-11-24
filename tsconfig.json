@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2024"],
+    "types": ["node"],
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
+  },
+  "include": [
+    "src/shared/**/*.ts",
+    "src/bridge/vite-source-tag.ts",
+    "src/server/**/*.ts",
+    "src/cli/**/*.ts",
+    "src/mcp/**/*.ts"
+  ],
+  "exclude": [
+    "src/bridge/inspector-bridge.ts",
+    "ui",
+    "demo",
+    "node_modules",
+    "dist"
+  ]
+}

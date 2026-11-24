@@ -1,0 +1,80 @@
+{
+  "$comment": "展卷规则清单。格式见 .agents/skills/self-harness/references/rules.md。",
+  "rules": [
+    {
+      "id": "R-01",
+      "text": "零宿主耦合与零本机绝对路径硬编码",
+      "source": "AGENTS.md#最硬的规则",
+      "level": 2,
+      "guard": ".harness/config.json boundaries + pnpm harness check",
+      "violations": []
+    },
+    {
+      "id": "R-02",
+      "text": "生产构建零 Studio/data-source/inspector-bridge/__zhanjuan 泄漏",
+      "source": "docs/ARCHITECTURE.md#不能破的关键不变量",
+      "level": 2,
+      "guard": "zhanjuanVite apply:'serve' + scripts/check-prod-leak.mjs 进 pnpm check",
+      "violations": []
+    },
+    {
+      "id": "R-03",
+      "text": "Node 24 直接执行的 .mjs 入口禁止写 TypeScript 语法断言",
+      "source": "docs/WORKFLOW.md#摩擦记录",
+      "level": 2,
+      "guard": "tests/cli-and-e2e.test.mjs 与 tests/mcp-server.test.mjs 真实子进程拉起 bin/zhanjuan.mjs 与 mcp/server.mjs",
+      "violations": [
+        {
+          "date": "2026-11-25",
+          "ref": "docs/WORKFLOW.md: bin/zhanjuan.mjs 与 mcp/server.mjs 出现 `(err as Error)` 触发 SyntaxError"
+        }
+      ]
+    },
+    {
+      "id": "R-04",
+      "text": "反代精确区分 /__zhanjuan/ 与 /__zhanjuan-health 及 UI 打包静态资源路由",
+      "source": "docs/ARCHITECTURE.md#不能破的关键不变量",
+      "level": 2,
+      "guard": "tests/cli-and-e2e.test.mjs 校验 /__zhanjuan-health JSON 与 UI bundle 资源全部 200",
+      "violations": [
+        {
+          "date": "2026-11-25",
+          "ref": "docs/WORKFLOW.md: startsWith('/__zhanjuan') 与 startsWith('/__zhanjuan/assets/') 误劫持健康探针与 UI JS/CSS 资产"
+        }
+      ]
+    },
+    {
+      "id": "R-05",
+      "text": "批注与裁图落在 Git 忽略的 notesDir，单一 HTTP 写入口并强制 rev 乐观锁",
+      "source": "docs/ARCHITECTURE.md#不能破的关键不变量",
+      "level": 2,
+      "guard": "zhanjuan check (git check-ignore) + tests/notes-store.test.mjs & mcp-server.test.mjs 409 冲突测试",
+      "violations": []
+    },
+    {
+      "id": "R-06",
+      "text": "ui/ 与 demo/ 样式只使用 Tailwind CSS v4 工具类与主题令牌，不回退手写组件类",
+      "source": "docs/DECISIONS.md",
+      "level": 2,
+      "guard": ".harness/config.json boundaries 守卫 .zj- 与 .demo- 回退",
+      "violations": []
+    },
+    {
+      "id": "R-07",
+      "text": "禁止依赖 React 19 已移除的 _debugSource，统一用 zhanjuan/vite 编译期 data-source",
+      "source": "docs/ARCHITECTURE.md",
+      "level": 2,
+      "guard": ".harness/config.json boundaries 对 src/bridge 拦截 _debugSource + tests/vite-source-tag.test.mjs",
+      "violations": []
+    },
+    {
+      "id": "R-08",
+      "text": "改动公共协议与架构取舍前先跑 pnpm harness find 核对既定决定，未授权环境不伪造 F 键冻帧",
+      "source": "AGENTS.md#最硬的规则",
+      "level": 5,
+      "guard": "常驻入口规则提醒",
+      "keep": "跨环境降级诚信与公共契约取舍需人/Agent 在设计讨论阶段主动判断，无法纯靠静态工具拦截",
+      "violations": []
+    }
+  ]
+}

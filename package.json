@@ -1,0 +1,73 @@
+{
+  "name": "zhanjuan",
+  "version": "0.1.0",
+  "description": "Agent-agnostic local design review and live prototype canvas for reviewing UI, pinning source-tagged annotations, and iterating with coding agents.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luzhengli/zhanjuan.git"
+  },
+  "homepage": "https://github.com/luzhengli/zhanjuan#readme",
+  "bugs": {
+    "url": "https://github.com/luzhengli/zhanjuan/issues"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "zhanjuan": "./bin/zhanjuan.mjs",
+    "zj": "./bin/zhanjuan.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/shared/index.d.ts",
+      "import": "./dist/shared/index.js"
+    },
+    "./vite": {
+      "types": "./bridge/vite-source-tag.d.ts",
+      "import": "./bridge/vite-source-tag.mjs"
+    },
+    "./mcp": "./mcp/server.mjs"
+  },
+  "files": [
+    "bin",
+    "bridge",
+    "bridge/inspector-bridge.js",
+    "dist",
+    "mcp",
+    "providers",
+    "SKILL.md",
+    "CHANGELOG.md",
+    "FRICTION.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build:core": "tsc -p tsconfig.json && vite build --config bridge/vite.config.ts",
+    "build:ui": "vite build --config ui/vite.config.ts",
+    "build": "pnpm build:core && pnpm build:ui",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p ui/tsconfig.json --noEmit && tsc -p demo/tsconfig.json --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "demo": "node bin/zhanjuan.mjs open --cwd demo",
+    "demo:build": "vite build --config demo/vite.config.ts",
+    "harness": "node scripts/harness.mjs",
+    "check:prod-leak": "node scripts/check-prod-leak.mjs",
+    "check": "pnpm build && pnpm typecheck && pnpm test && pnpm demo:build && pnpm check:prod-leak && node bin/zhanjuan.mjs check --cwd demo && pnpm harness check"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.28.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0"
+  }
+}

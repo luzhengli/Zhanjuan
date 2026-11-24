@@ -1,0 +1,104 @@
+{
+  "$comment": "展卷判官清单。格式见 .agents/skills/self-harness/references/oracles.md。",
+  "oracles": [
+    {
+      "group": "正确性",
+      "dimension": "JSX 编译期 data-source 注入与 serve-only 隔离",
+      "oracle": "tests/vite-source-tag.test.mjs",
+      "grade": "机判",
+      "when": "每次 pnpm test / pnpm check",
+      "trust": "高：覆盖 TSX 泛型、Portal/Fragment 过滤、行号保留与 build 空操作"
+    },
+    {
+      "group": "正确性",
+      "dimension": "反代剥离限框头、WS HMR 隧道与 4 要素探针复用门禁",
+      "oracle": "tests/proxy-and-probe.test.mjs",
+      "grade": "机判",
+      "when": "每次 pnpm test / pnpm check",
+      "trust": "高：受限沙箱需放行回环端口，正常终端全绿"
+    },
+    {
+      "group": "正确性",
+      "dimension": "NotesStore 状态机、rev 乐观锁与离线排他锁",
+      "oracle": "tests/notes-store.test.mjs",
+      "grade": "机判",
+      "when": "每次 pnpm test / pnpm check",
+      "trust": "高：纯文件系统与内存校验，沙箱内可稳定运行"
+    },
+    {
+      "group": "正确性",
+      "dimension": "stdio MCP 7 工具契约与 SSE 实时推送",
+      "oracle": "tests/mcp-server.test.mjs",
+      "grade": "机判",
+      "when": "每次 pnpm test / pnpm check",
+      "trust": "高：真实子进程 stdio JSON-RPC + SSE 断言"
+    },
+    {
+      "group": "正确性",
+      "dimension": "CLI 入口与 demo Vite 代理端到端链路",
+      "oracle": "tests/cli-and-e2e.test.mjs",
+      "grade": "机判",
+      "when": "每次 pnpm test / pnpm check",
+      "trust": "高：使用异步 execFile 避免阻塞父进程事件循环"
+    },
+    {
+      "group": "守规矩",
+      "dimension": "全仓库 TypeScript 严格类型与构建产物完整性",
+      "oracle": "pnpm build && pnpm typecheck",
+      "grade": "机判",
+      "when": "每次提交前",
+      "trust": "高：覆盖 core、ui/、demo/ 三套 tsconfig"
+    },
+    {
+      "group": "守规矩",
+      "dimension": "demo 生产包零开发态与 Studio 残留",
+      "oracle": "pnpm demo:build && pnpm check:prod-leak",
+      "grade": "机判",
+      "when": "每次 pnpm check",
+      "trust": "高：扫描 demo/dist/ 全部文本产物"
+    },
+    {
+      "group": "守规矩",
+      "dimension": "开源边界词与 self-harness 清单健康度",
+      "oracle": "pnpm harness check",
+      "grade": "机判",
+      "when": "每次 pnpm check",
+      "trust": "高：自动校验 rules/oracles schema、边界词与 skill 版本一致"
+    },
+    {
+      "group": "符合意图",
+      "dimension": "总览冷启动自动快照、活页 C/R 拾取、Proposals 基准冻结与 SSE 联动",
+      "oracle": "真浏览器端到端巡检截图与交互断言",
+      "grade": "机证",
+      "when": "每次 UI 重大重构后",
+      "trust": "当前靠手工或浏览器子代理触发",
+      "next": "补一条可重复执行的 Playwright 无头交互冒烟脚本（BACKLOG B-05）"
+    },
+    {
+      "group": "符合意图",
+      "dimension": "异构外部宿主零改代码直接穿透限框头接入",
+      "oracle": "真实宿主项目联调验证",
+      "grade": "人判",
+      "when": "首版验收与跨仓联调",
+      "trust": "demo 为同构 Vite 宿主，尚未覆盖双端口独立后端",
+      "next": "在第二个异构 Web 项目新增 .harness/canvas.json 实测（BACKLOG B-06）"
+    },
+    {
+      "group": "体验",
+      "dimension": "Chrome preferCurrentTab 真帧定格、触控板缩放帧率与中文 IME 静音",
+      "oracle": "真机 Chrome / Safari 实测",
+      "grade": "人判",
+      "when": "人用 pnpm demo 验收（BACKLOG B-02）",
+      "trust": "无头浏览器难以完整模拟连续授权条与 Retina 触控板手感",
+      "next": "由人在真机 Chrome 与 Safari 核验后在 BACKLOG B-02 勾选"
+    },
+    {
+      "group": "流程",
+      "dimension": "常驻入口预算、断链、规则档位与摩擦复盘状态",
+      "oracle": "pnpm harness audit & pnpm harness status",
+      "grade": "机判",
+      "when": "开工 / 收工 / 复盘",
+      "trust": "高：注意 unborn HEAD 时 gitInfo 的边界限制已记入摩擦"
+    }
+  ]
+}

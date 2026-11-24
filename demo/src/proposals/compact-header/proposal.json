@@ -1,0 +1,5 @@
+{
+  "title": "Compact Header",
+  "description": "Tightens top bar spacing and collapses secondary metrics into a single status strip.",
+  "baseBoard": "Workspace"
+}

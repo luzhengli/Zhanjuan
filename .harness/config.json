@@ -1,0 +1,115 @@
+{
+  "$comment": "self-harness 的项目配置。说明见 .agents/skills/self-harness/SKILL.md。",
+  "entry": ["AGENTS.md"],
+  "startup": ["docs/STATUS.md"],
+  "status": "docs/STATUS.md",
+  "backlog": "docs/BACKLOG.md",
+  "decisions": "docs/DECISIONS.md",
+  "friction": {
+    "file": "docs/WORKFLOW.md",
+    "heading": "摩擦记录",
+    "threshold": 5
+  },
+  "queues": [
+    {
+      "title": "待人处理",
+      "file": "docs/BACKLOG.md",
+      "heading": "待人处理"
+    }
+  ],
+  "docs": [
+    "AGENTS.md",
+    "README.md",
+    "SKILL.md",
+    "CHANGELOG.md",
+    "FRICTION.md",
+    "providers",
+    "docs",
+    ".harness"
+  ],
+  "metricsExclude": [
+    "pnpm-lock.yaml",
+    "dist/",
+    "demo/dist/",
+    ".agents/skills/self-harness/"
+  ],
+  "check": "pnpm check",
+  "ports": [4379],
+  "boundaries": [
+    {
+      "dir": "src",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "开源包源码不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "ui",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "画布前端源码不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "demo",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "独立演示宿主不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "bin",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "CLI 入口不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "bridge",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "拾取桥导出不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "mcp",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "MCP 入口不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "providers",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "Provider 规程不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "docs",
+      "forbidden": ["/Users/", "/home/", "C:\\Users\\"],
+      "why": "仓库文档不得硬编码任何本机用户路径"
+    },
+    {
+      "dir": "src/bridge",
+      "forbidden": ["_debugSource"],
+      "why": "React 19 已移除 _debugSource，只能用 zhanjuan/vite 编译期 data-source"
+    },
+    {
+      "dir": "ui/src/styles.css",
+      "forbidden": [".zj-", ".demo-"],
+      "why": "ui 已全量迁至 Tailwind CSS v4，禁止回退手写组件类"
+    },
+    {
+      "dir": "demo/src/styles/app.css",
+      "forbidden": [".zj-", ".demo-"],
+      "why": "demo 已全量迁至 Tailwind CSS v4，禁止回退手写组件类"
+    }
+  ],
+  "budgets": {
+    "entryLines": 120,
+    "statusLines": 40
+  },
+  "find": [
+    { "file": "docs/DECISIONS.md" },
+    { "file": "docs/BACKLOG.md" },
+    { "file": "docs/ARCHITECTURE.md" },
+    { "file": "docs/STATUS.md" }
+  ],
+  "decisionsMetric": {
+    "agent": "Agent 定",
+    "overturned": "推翻|改回|返工"
+  },
+  "extra": [
+    {
+      "title": "展卷 demo 批注待办",
+      "run": "node bin/zhanjuan.mjs status --cwd demo"
+    }
+  ]
+}

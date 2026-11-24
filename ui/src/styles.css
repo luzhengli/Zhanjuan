@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-studio: #f2f2f0;
+  --color-chrome: #ffffff;
+  --color-subtle: #f5f5f3;
+  --color-hover: #ebebea;
+  --color-hairline: #e5e5e2;
+  --color-strong: #d4d4cf;
+  --color-ink: #18181b;
+  --color-muted: #52525b;
+  --color-dim: #8a8a93;
+  --color-accent: #3b5bfd;
+  --color-accent-soft: #eef2ff;
+  --color-pin-open: #ea580c;
+  --color-pin-working: #2563eb;
+  --color-pin-addressed: #16a34a;
+  --color-pin-resolved: #64748b;
+
+  --shadow-artboard: 0 2px 10px rgba(0, 0, 0, 0.045), 0 12px 32px rgba(0, 0, 0, 0.06);
+  --shadow-float: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --animate-pin-pulse: pin-pulse 1.5s infinite;
+}
+
+@keyframes pin-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.65);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    height: 100%;
+    background: var(--color-studio);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.45;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--color-subtle);
+    border: 1px solid var(--color-strong);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+}
